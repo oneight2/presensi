@@ -10,7 +10,6 @@ $admin = mysqli_query($koneksi, "SELECT * FROM admin WHERE username='$username'"
 
 if (mysqli_num_rows($pegawai) == 1 or mysqli_num_rows($admin) == 1) {
     session_start();
-    //variable tahun ajaran
  
     if (mysqli_num_rows($pegawai) == 1) {
         $rows = mysqli_fetch_assoc($pegawai);
@@ -34,6 +33,7 @@ if (mysqli_num_rows($pegawai) == 1 or mysqli_num_rows($admin) == 1) {
             header("Location: " . BASE_URL . "dashboard");
         }
     }
+    exit;
     
 }
 

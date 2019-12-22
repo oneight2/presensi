@@ -6,7 +6,7 @@ if (!isset($_SESSION['status'])) {
 if ($_SESSION['status'] == 'pegawai') {
 $pegawai = query("SELECT * FROM pegawai WHERE nip = $_SESSION[id_user]")[0];
 }
-if ($_SESSION['status'] == 'admin') {
+elseif ($_SESSION['status'] == 'admin') {
 $admin = query("SELECT * FROM admin WHERE id = $_SESSION[id_user]")[0];
 }
  ?>
@@ -31,6 +31,7 @@ $admin = query("SELECT * FROM admin WHERE id = $_SESSION[id_user]")[0];
     
   </head>
   <?php if (isset($_SESSION['status'])): ?>
+
   
   <body class="">
     <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
@@ -48,19 +49,7 @@ $admin = query("SELECT * FROM admin WHERE id = $_SESSION[id_user]")[0];
           
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <div class="media align-items-center">
-                <span class="avatar avatar-sm rounded-circle">
-                  <?php if ($_SESSION['status'] == 'pegawai'): ?>
-                  <?php if ($pegawai['foto'] == NULL): ?>
-                  <img src="<?= BASE_URL.'/assets/img/profil/user_icon.png' ?>" >
-                  <?php endif ?>
-                  <?php if ($pegawai['foto'] != NULL): ?>
-                  <img src="<?= BASE_URL.'/assets/img/profil/'.$pegawai['foto'] ?>">
-                  <?php endif ?>
-                  <?php endif ?>
-                  ">
-                </span>
-              </div>
+             
             </a>
             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
               <div class=" dropdown-header noti-title">
@@ -117,8 +106,7 @@ $admin = query("SELECT * FROM admin WHERE id = $_SESSION[id_user]")[0];
             </li>
             
           </ul>
-          <?php endif ?>
-          <?php if ($_SESSION['status'] == 'pegawai'): ?>
+          <?php elseif ($_SESSION['status'] == 'pegawai'): ?>
           <ul class="navbar-nav">
             <li class="nav-item    active " active=" ">
               <a class=" nav-link " href="<?= BASE_URL.'dashboard' ?>"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
@@ -158,17 +146,14 @@ $admin = query("SELECT * FROM admin WHERE id = $_SESSION[id_user]")[0];
                     <?php if ($_SESSION['status'] == 'pegawai'): ?>
                       <?php if ($pegawai['foto'] == NULL): ?>
                         <img src="<?= BASE_URL.'/assets/img/profil/user_icon.png' ?>" >
-                      <?php endif ?>
-                      <?php if ($pegawai['foto'] != NULL): ?>
+                      <?php elseif ($pegawai['foto'] != NULL): ?>
                         <img src="<?= BASE_URL.'/assets/img/profil/'.$pegawai['foto'] ?>">
                       <?php endif ?>
-                    <?php endif ?>
                     <!-- foto admin -->
-                    <?php if ($_SESSION['status'] == 'admin'): ?>
+                    <?php elseif ($_SESSION['status'] == 'admin'): ?>
                       <?php if ($admin['foto'] == NULL): ?>
                         <img src="<?= BASE_URL.'/assets/img/profil/user_icon.png' ?>" >
-                      <?php endif ?>
-                      <?php if ($admin['foto'] != NULL): ?>
+                      <?php elseif ($admin['foto'] != NULL): ?>
                         <img src="<?= BASE_URL.'/assets/img/profil/'.$pegawai['foto'] ?>">
                       <?php endif ?>
                     <?php endif ?>
@@ -193,4 +178,4 @@ $admin = query("SELECT * FROM admin WHERE id = $_SESSION[id_user]")[0];
           </ul>
         </div>
       </nav>
-      <?php endif ?>
+  <?php endif ?>
